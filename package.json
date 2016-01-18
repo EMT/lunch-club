@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "botkit": "0.0.5"
+    "botkit": "0.0.5",
+    "underscore": "^1.8.3"
   }
 }

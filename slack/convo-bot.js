@@ -23,6 +23,14 @@ controller.spawn({
   }
 });
 
+controller.on('rtm_open',function(bot) {
+  console.log('** The RTM api just connected!');
+});
+
+controller.on('rtm_close',function(bot) {
+  console.log('** The RTM api just closed');
+  // we may want to attempt to re-open
+});
 controller.hears(['lunch club', 'lunchclub', 'lunch', 'review'],['direct_mention','direct_message'],function(bot,message) {
   bot.startConversation(message, askWhen);
 });
