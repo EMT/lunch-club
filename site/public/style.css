@@ -93,6 +93,7 @@ h4 {
 
 table {
   text-align: left;
+  font-size: 1.1em;
   font-family: inherit; }
 
 td {
@@ -109,19 +110,24 @@ th {
 
 .rating-list {
   clear: both;
-  display: table; }
+  display: table;
+  height: 25px; }
   .rating-list:after {
     content: '';
     clear: both;
     display: table; }
   .rating-list li {
-    width: 9%;
+    width: 10%;
     padding-right: 1%;
+    padding-top: 5px;
     float: left;
     display: block; }
   .rating-list img {
     width: 100%;
     display: block; }
+
+.rating-col {
+  width: 20%; }
 
 .page-wrapper {
   max-width: 1040px;
