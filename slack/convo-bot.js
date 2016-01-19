@@ -17,6 +17,7 @@ var controller = Botkit.slackbot({
 var phrases = {
   cancel: new RegExp(/^(cancel|escape)/i),
   me: new RegExp(/^(me|myself|i did)/i),
+  rating: new RegExp(/^(high|medium|low)/i)
 }
 
 controller.spawn({
@@ -102,14 +103,33 @@ askLoser = function(response, convo) {
   }, {'key': 'loser'});
 }
 askMeatyness = function(response, convo) {
-  convo.ask("Sí, would you rate the cheesyness high, medium or low?", function(response, convo) {
-    askCheesyness(response, convo);
-    convo.next();
+  convo.ask("Sí, would you rate the meatyness high, medium or low?", function(response, convo) {
+
+    // V--- Figure out a way to make this into a function, don't like it repeating ---V
+    if (phrases.rating.test(response.text)) {
+      askCheesyness(response, convo);
+      convo.next();
+    } else {
+      convo.say('Please use the ratings: high, medium or low.')
+      convo.repeat();
+      convo.next();
+    }
+
   }, {'key': 'meat'});
 }
 askCheesyness = function(response, convo) {
-  convo.ask("Sí, would you rate the meatyness high, medium or low?", function(response, convo) {
-    askRating(response, convo);
+  convo.ask("Sí, would you rate the cheesyness high, medium or low?", function(response, convo) {
+
+    // V--- Figure out a way to make this into a function, don't like it repeating ---V
+    if (phrases.rating.test(response.text)) {
+      askRating(response, convo);
+      convo.next();
+    } else {
+      convo.say('Please use the ratings: high, medium or low.')
+      convo.repeat();
+      convo.next();
+    }
+
     convo.next();
   }, {'key': 'cheese'});
 }
@@ -140,8 +160,8 @@ storeData = function(response, convo) {
   convo.on('end',function(convo) {
     if (convo.status=='completed') {
       var res = convo.extractResponses();
-      console.log(res);
 
+      console.log(res);
       res.created = Date.now().toString();
 
       // save with generated ID
