@@ -17,3 +17,26 @@ th {
 	text-transform: uppercase;
 	padding-bottom: 0.5em;
 }
+
+.rating-list {
+    clear: both;
+    display: table;
+
+	&:after {
+		content: '';
+		clear: both;
+		display: table;
+	}
+
+	li {
+		width: 9%;
+		padding-right: 1%;
+		float: left;
+		display: block;
+	}
+
+	img {
+		width: 100%;
+		display: block;
+	}
+}

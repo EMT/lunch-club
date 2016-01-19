@@ -22,5 +22,26 @@ app.get('/', function(req, res) {
     res.render('index',{title:"The Lunch Club", reviews: db.allSync()});
 });
 
+
+
+hbs.registerHelper('ratings', function() {
+  var rating = hbs.handlebars.escapeExpression(this.rating);
+
+
+  var ratingsList = '';
+
+  for (var i = 0; i < 10; i++) {
+
+  	if (i < rating) {
+  		ratingsList += '<li><img src="/assets/triangle-filled.svg" alt=""></li>'
+  	} else {
+  		ratingsList += '<li><img src="/assets/triangle.svg" alt=""></li>'
+  	}
+
+  };
+
+  return new hbs.handlebars.SafeString(ratingsList);
+});
+
 app.listen(5000);
 console.log('Express server listening on port 5000')

@@ -32,7 +32,11 @@
 					<td>{{loser}}</td>
 					<td>{{meat}}</td>
 					<td>{{cheese}}</td>
-					<td>{{rating}}</td>
+					<td>
+						<ul class="rating-list rating-{{rating}}">
+							{{ratings}}
+						</ul>
+					</td>
 				</tr>
 			{{/each}}
 			</tbody>

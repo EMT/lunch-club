@@ -107,6 +107,22 @@ th {
   text-transform: uppercase;
   padding-bottom: 0.5em; }
 
+.rating-list {
+  clear: both;
+  display: table; }
+  .rating-list:after {
+    content: '';
+    clear: both;
+    display: table; }
+  .rating-list li {
+    width: 9%;
+    padding-right: 1%;
+    float: left;
+    display: block; }
+  .rating-list img {
+    width: 100%;
+    display: block; }
+
 .page-wrapper {
   max-width: 1040px;
   padding: 20px;
