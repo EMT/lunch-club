@@ -111,7 +111,7 @@ askLoser = function(response, convo) {
   }, {'key': 'loser'});
 }
 askMeatyness = function(response, convo) {
-  convo.ask("Sí, would you rate the meatyness high, medium or low?", function(response, convo) {
+  convo.ask("Sí, would you rate the meatiness high, medium or low?", function(response, convo) {
 
     // V--- Figure out a way to make this into a function, don't like it repeating ---V
     if (phrases.rating.test(response.text)) {
@@ -126,7 +126,7 @@ askMeatyness = function(response, convo) {
   }, {'key': 'meat'});
 }
 askCheesyness = function(response, convo) {
-  convo.ask("Sí, would you rate the cheesyness high, medium or low?", function(response, convo) {
+  convo.ask("Sí, would you rate the cheesiness high, medium or low?", function(response, convo) {
 
     // V--- Figure out a way to make this into a function, don't like it repeating ---V
     if (phrases.rating.test(response.text)) {
