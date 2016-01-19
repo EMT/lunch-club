@@ -1,6 +1,7 @@
 var Botkit = require('Botkit');
 var Store = require("jfs");
 var _ = require('underscore');
+var request = require('request');
 
 var db = new Store("../data",{pretty:true, type:'single'});
 
@@ -39,7 +40,7 @@ controller.hears(['remove latest'],['direct_mention','direct_message'],function(
   reviewsKeys.forEach(function(key,index) {
       if (index + 1 == keysLength) {
         db.delete(key, function(err){
-          bot.reply(message, 'Sí, latest review removed. It was rubbish anyway.');
+          bot.reply(message, 'Sí, latest review removed.');
           console.log(key, index);
         });
       }
@@ -53,10 +54,8 @@ controller.hears(['lunch club', 'lunchclub', 'lunch', 'review'],['direct_mention
 
 askWhen = function(response, convo) {
   convo.say("¿Qué?");
-  convo.say("Oh, lunch...");
-  convo.ask("When did you go?", function(response, convo) {
+  convo.ask("Oh, lunch... when did you go?", function(response, convo) {
     askWhere(response, convo);
-    // storeData(response, convo);
     convo.next();
   }, {'key': 'when'});
 }
@@ -79,20 +78,20 @@ askLoser = function(response, convo) {
   }, {'key': 'loser'});
 }
 askMeatyness = function(response, convo) {
-  convo.ask("Sí, who had the most meat?", function(response, convo) {
+  convo.ask("Sí, would you rate the cheesyness high, medium or low?", function(response, convo) {
     askCheesyness(response, convo);
     convo.next();
   }, {'key': 'meat'});
 }
 askCheesyness = function(response, convo) {
-  convo.ask("Sí, who had the most cheese?", function(response, convo) {
+  convo.ask("Sí, would you rate the meatyness high, medium or low?", function(response, convo) {
     askRating(response, convo);
     convo.next();
   }, {'key': 'cheese'});
 }
 askRating = function(response, convo) {
   convo.ask("Sí, what would you rate it out of 10?", function(response, convo) {
-    convo.say("Sí! i'll tell the chef, Good by.");
+    convo.say("Sí! i'll tell the chef, Good bye.");
     storeData(response, convo);
     convo.next();
   }, {'key': 'rating'});
@@ -111,7 +110,7 @@ storeData = function(response, convo) {
       });
 
     } else {
-      // something happened that caused the conversation to stop prematurely
+      convo.sayFirst("Okay, i'll leave you alone."); // This isn't firing for some reason ?
     }
 
   });
