@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "botkit": "0.0.5",
+    "chrono-node": "^1.1.2",
     "hbs": "^4.0.0",
     "request": "^2.67.0",
     "underscore": "^1.8.3"

@@ -2,6 +2,8 @@ var Botkit = require('Botkit');
 var Store = require("jfs");
 var _ = require('underscore');
 var request = require('request');
+var chrono = require('chrono-node');
+var moment = require('moment');
 
 var db = new Store("../data",{pretty:true, type:'single'});
 
@@ -62,6 +64,12 @@ askWhen = function(response, convo) {
   convo.say("¿Qué?");
   convo.ask("Oh, lunch... when did you go?", function(response, convo) {
     checkCancel(response, convo);
+
+    var parsedDate = chrono.parseDate(response.text);
+    var formattedDate = moment(parsedDate).format('DD/MM/YYYY');
+    console.log(formattedDate);
+    response.text = formattedDate;
+
     askWhere(response, convo);
     convo.next();
   }, {'key': 'when'});
