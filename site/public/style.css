@@ -1,0 +1,131 @@
+/**
+ * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
+ * http://cssreset.com
+ */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+*, *:after, *:before {
+  box-sizing: border-box; }
+
+html {
+  -webkit-font-smoothing: antialiased;
+  font-size: 17px; }
+
+body {
+  font: 1rem/1.4 "Karla", sans-serif; }
+
+h1 {
+  font: 2.45rem/1.1 "Karla", sans-serif; }
+
+h2 {
+  font: 1.75rem/1.2 "Karla", sans-serif; }
+
+h3 {
+  font: 1.5rem/1.2 "Karla", sans-serif; }
+
+h4 {
+  font: 1rem/1.2 "Karla", sans-serif; }
+
+.bolded {
+  font-weight: bold; }
+
+.two-col-text {
+  margin-bottom: 1em;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  -ms-column-count: 2;
+  -o-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 2rem;
+  -moz-column-gap: 2rem;
+  -ms-column-gap: 2rem;
+  -o-column-gap: 2rem;
+  column-gap: 2rem;
+  -webkit-column-width: 300px;
+  -moz-column-width: 300px;
+  -ms-column-width: 300px;
+  -o-column-width: 300px;
+  column-width: 300px; }
+  .two-col-text p {
+    orphans: 5;
+    widows: 3; }
+
+table {
+  text-align: left;
+  font-family: inherit; }
+
+td {
+  padding: 0.75em 0;
+  text-transform: capitalize; }
+
+tr {
+  border-bottom: 1px solid; }
+
+th {
+  font-weight: 700;
+  text-transform: uppercase;
+  padding-bottom: 0.5em; }
+
+.page-wrapper {
+  max-width: 1040px;
+  padding: 20px;
+  width: 100%;
+  margin: 0 auto; }
+
+.header-image {
+  display: table;
+  margin: 30px auto;
+  max-width: 300px;
+  width: 100%; }
+  .header-image img {
+    width: 100%; }
+
+table {
+  width: 100%; }
+
+html {
+  background: #fee3e5;
+  color: #ff424f; }
+
+/*# sourceMappingURL=style.css.map */

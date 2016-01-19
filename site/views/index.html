@@ -3,38 +3,40 @@
 <head>
 	<meta charset="UTF-8">
 	<title>{{title}}</title>
-	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link href='https://fonts.googleapis.com/css?family=Karla:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
-	<h1>{{title}}</h1>
-	<table class="pure-table">
-		<thead>
-			<tr>
-				<th>When</th>
-				<th>Where</th>
-				<th>Winner</th>
-				<th>Loser</th>
-				<th>Meatyness</th>
-				<th>Cheesyness</th>
-				<th>FW Star</th>
-			</tr>
-		</thead>
-		<tbody>
-
-		{{#each reviews}}
-			<tr>
-				<td>{{when}}</td>
-				<td>{{where}}</td>
-				<td>{{winner}}</td>
-				<td>{{loser}}</td>
-				<td>{{meat}}</td>
-				<td>{{cheese}}</td>
-				<td>{{rating}}</td>
-			</tr>
-		{{/each}}
-
-
-		</tbody>
-	</table>
+	<div class="page-wrapper">
+		<div class="header-image">
+			<img src="/assets/tlc-header.png" alt="">
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>When</th>
+					<th>Where</th>
+					<th>Winner</th>
+					<th>Loser</th>
+					<th>Meatyness</th>
+					<th>Cheesyness</th>
+					<th>FW Stars</th>
+				</tr>
+			</thead>
+			<tbody>
+			{{#each reviews}}
+				<tr>
+					<td>{{when}}</td>
+					<td>{{where}}</td>
+					<td>{{winner}}</td>
+					<td>{{loser}}</td>
+					<td>{{meat}}</td>
+					<td>{{cheese}}</td>
+					<td>{{rating}}</td>
+				</tr>
+			{{/each}}
+			</tbody>
+		</table>
+	</div>
 </body>
 </html>

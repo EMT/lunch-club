@@ -1,0 +1,19 @@
+table {
+	text-align: left;
+	font-family: inherit;
+}
+
+td {
+	padding: 0.75em 0;
+	text-transform: capitalize;
+}
+
+tr {
+	border-bottom: 1px solid;
+}
+
+th {
+	font-weight: 700;
+	text-transform: uppercase;
+	padding-bottom: 0.5em;
+}

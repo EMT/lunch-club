@@ -11,7 +11,9 @@ var allReviews = db.allSync();
 
 app.set('view engine', 'html');
 app.engine('html', require('hbs').__express);
+
 app.set('views', __dirname + '/views')
+app.use('/assets', express.static(__dirname + '/public'));
 
 app.engine('html', hbs.__express);
 
