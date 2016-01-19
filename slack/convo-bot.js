@@ -14,6 +14,11 @@ var controller = Botkit.slackbot({
  debug: false
 });
 
+var phrases = {
+  cancel: new RegExp(/^(cancel|escape)/i),
+  me: new RegExp(/^(me|myself|i did)/i),
+}
+
 controller.spawn({
   token: process.env.token
 }).startRTM(function(err) {
@@ -69,7 +74,7 @@ askWhere = function(response, convo) {
 askWinner = function(response, convo) {
   convo.ask("Sí, who had the best meal?", function(response, convo) {
 
-    if (response.text == 'me' || response.text == 'myself') {
+    if (phrases.me.test(response.text)) {
       findMyself(response.user, function(results) {
         if (results) {
           response.text = results.capitalize();
@@ -84,7 +89,7 @@ askWinner = function(response, convo) {
 askLoser = function(response, convo) {
   convo.ask("Sí, who had the worst meal?", function(response, convo) {
 
-    if (response.text == 'me' || response.text == 'myself') {
+    if (phrases.me.test(response.text)) {
       findMyself(response.user, function(results) {
         if (results) {
           response.text = results.capitalize();
