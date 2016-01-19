@@ -55,6 +55,7 @@ controller.hears(['lunch club', 'lunchclub', 'lunch', 'review'],['direct_mention
 askWhen = function(response, convo) {
   convo.say("¿Qué?");
   convo.ask("Oh, lunch... when did you go?", function(response, convo) {
+    checkCancel(response, convo);
     askWhere(response, convo);
     convo.next();
   }, {'key': 'when'});
@@ -96,6 +97,13 @@ askRating = function(response, convo) {
     convo.next();
   }, {'key': 'rating'});
 }
+
+checkCancel = function(response, convo) {
+  if (response.text == 'cancel') {
+    convo.stop()
+  }
+}
+
 storeData = function(response, convo) {
   convo.on('end',function(convo) {
     if (convo.status=='completed') {
