@@ -68,12 +68,30 @@ askWhere = function(response, convo) {
 }
 askWinner = function(response, convo) {
   convo.ask("Sí, who had the best meal?", function(response, convo) {
+
+    if (response.text == 'me' || response.text == 'myself') {
+      findMyself(response.user, function(results) {
+        if (results) {
+          response.text = results.capitalize();
+        }
+      });
+    }
+
     askLoser(response, convo);
     convo.next();
   }, {'key': 'winner'});
 }
 askLoser = function(response, convo) {
   convo.ask("Sí, who had the worst meal?", function(response, convo) {
+
+    if (response.text == 'me' || response.text == 'myself') {
+      findMyself(response.user, function(results) {
+        if (results) {
+          response.text = results.capitalize();
+        }
+      });
+    }
+
     askMeatyness(response, convo);
     convo.next();
   }, {'key': 'loser'});
@@ -104,6 +122,15 @@ checkCancel = function(response, convo) {
   }
 }
 
+findMyself = function(userid, callback) {
+  request('https://slack.com/api/users.info?token=' + process.env.token+ '&user=' + userid +'&pretty=1', function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        var userDetails = JSON.parse(body);
+        callback(userDetails.user.name);
+    }
+  })
+}
+
 storeData = function(response, convo) {
   convo.on('end',function(convo) {
     if (convo.status=='completed') {
@@ -122,4 +149,8 @@ storeData = function(response, convo) {
     }
 
   });
+}
+
+String.prototype.capitalize = function() {
+    return this.charAt(0).toUpperCase() + this.slice(1);
 }
