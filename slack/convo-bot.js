@@ -57,9 +57,15 @@ controller.hears(['remove latest'],['direct_mention','direct_message'],function(
 });
 
 controller.hears(['lunch club', 'lunchclub', 'lunch', 'review'],['direct_mention','direct_message'],function(bot,message) {
-  bot.startConversation(message, askWhen);
+  bot.startConversation(message, askWhere);
 });
 
+askWhere = function(response, convo) {
+  convo.ask("Sí, where did you go?", function(response, convo) {
+    askWhen(response, convo);
+    convo.next();
+  }, {'key': 'where'});
+}
 askWhen = function(response, convo) {
   convo.say("¿Qué?");
   convo.ask("Oh, lunch... when did you go?", function(response, convo) {
@@ -70,15 +76,9 @@ askWhen = function(response, convo) {
     console.log(formattedDate);
     response.text = formattedDate;
 
-    askWhere(response, convo);
-    convo.next();
-  }, {'key': 'when'});
-}
-askWhere = function(response, convo) {
-  convo.ask("Sí, where did you go?", function(response, convo) {
     askWinner(response, convo);
     convo.next();
-  }, {'key': 'where'});
+  }, {'key': 'when'});
 }
 askWinner = function(response, convo) {
   convo.ask("Sí, who had the best meal?", function(response, convo) {
