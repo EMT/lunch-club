@@ -61,14 +61,14 @@ controller.hears(['lunch club', 'lunchclub', 'lunch', 'review'],['direct_mention
 });
 
 askWhere = function(response, convo) {
-  convo.ask("Sí, where did you go?", function(response, convo) {
+  convo.say("¿Qué?");
+  convo.ask("Oh, where did you go?", function(response, convo) {
     askWhen(response, convo);
     convo.next();
   }, {'key': 'where'});
 }
 askWhen = function(response, convo) {
-  convo.say("¿Qué?");
-  convo.ask("Oh, lunch... when did you go?", function(response, convo) {
+  convo.ask("Sí, when did you go?", function(response, convo) {
     checkCancel(response, convo);
 
     var parsedDate = chrono.parseDate(response.text);

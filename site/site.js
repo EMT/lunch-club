@@ -1,21 +1,30 @@
-var Store = require("jfs");
+var Store 	= require("jfs");
 var express = require('express');
-var hbs = require('hbs');
-var _ = require('underscore');
+var hbs 	= require('hbs');
+var _ 		= require('underscore');
+var app 	= express();
+var db 		= new Store("../data",{pretty:true, type:'single'});
 
-var app = express();
-var db = new Store("../data",{pretty:true, type:'single'});
-
+// Set our views to use handlebars for compiling but still use .html extension instead of .hbs
 app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
+// Setup the views directory
 app.set('views', __dirname + '/views')
+
+// Setup the public directory, is it worth caching this ?
 app.use('/assets', express.static(__dirname + '/public'));
 
+// Setup our one and only route, grab the reviews data from data.json
 app.get('/', function(req, res) {
     res.render('index',{title:"The Lunch Club", reviews: getData()});
 });
 
+// Start listening on the port defined in the env or port 5000 as default
+app.listen(5000);
+console.log('Express server listening on port 5000');
+
+// Little helper for handlebars
 hbs.registerHelper('ratings', function() {
   var rating = Math.round(hbs.handlebars.escapeExpression(this.rating));
   var ratingsList = '';
@@ -31,18 +40,12 @@ hbs.registerHelper('ratings', function() {
   return new hbs.handlebars.SafeString(ratingsList);
 });
 
-function getData(reversed) {
+// Grab the data from data.json file in the shared parent directory.
+// no point using a db for something this small,if it starts to
+// slow down then we can look at implimenting something.
+function getData() {
 	console.log('Grabbing some data from data.json');
 	var data = db.allSync();
-	var dataArrayed = Object.keys(data).map(function(k) { return data[k] });
-	var dataReversed = dataArrayed.sort().reverse();
-
-	if (reversed) {
-		return dataReversed;
-	} else {
-		return dataArrayed;
-	}
+	var dataArrayed = Object.keys(data).map(function(k) { return data[k] }).reverse();
+	return dataArrayed;
 }
-
-app.listen(5000);
-console.log('Express server listening on port 5000')
