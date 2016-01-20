@@ -175,6 +175,9 @@ storeData = function(response, convo) {
       // save with generated ID
       db.save(res, function(err, id){
         // id is a unique ID
+        if (err) {
+          console.log(err);
+        }
       });
 
     } else {
