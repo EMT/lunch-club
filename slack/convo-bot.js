@@ -1,4 +1,4 @@
-var Botkit = require('Botkit');
+var Botkit = require('botkit');
 var Store = require("jfs");
 var _ = require('underscore');
 var request = require('request');
