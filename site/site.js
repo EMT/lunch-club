@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var Store 	= require("jfs");
 var express = require('express');
 var hbs 	= require('hbs');
