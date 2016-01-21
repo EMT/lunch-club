@@ -27,7 +27,7 @@ var controller = Botkit.slackbot({
 var phrases = {
   cancel: new RegExp(/^(cancel|escape|stop)/i),
   me: new RegExp(/^(me|myself|i did)/i),
-  rating: new RegExp(/^(high|medium|low)/i)
+  rating: new RegExp(/^(high|medium|low|zero)/i)
 }
 
 // Setup a new botkit Bot using the slack api token we defined in our environment
@@ -145,7 +145,7 @@ askLoser = function(response, convo) {
   }, {'key': 'loser'});
 }
 askMeatyness = function(response, convo) {
-  convo.ask("Sí, would you rate the meatiness high, medium or low?", function(response, convo) {
+  convo.ask("Sí, would you rate the meatiness high, medium, low or zero?", function(response, convo) {
     checkCancel(response, convo);
 
     checkRatingFormatting(response, convo, function(){
@@ -156,7 +156,7 @@ askMeatyness = function(response, convo) {
   }, {'key': 'meat'});
 }
 askCheesyness = function(response, convo) {
-  convo.ask("Sí, would you rate the cheesiness high, medium or low?", function(response, convo) {
+  convo.ask("Sí, would you rate the cheesiness high, medium, low or zero?", function(response, convo) {
     checkCancel(response, convo);
 
     checkRatingFormatting(response, convo, function(){
