@@ -1,6 +1,9 @@
 # Lunch Club
 
-## Local Setup
+### Local Setup
+
+
+#### Installing
 
 ```
 git clone https://github.com/EMT/lunch-club.git
@@ -8,29 +11,30 @@ cd lunch-club
 npm install
 ```
 
-### Running the slack bot
+#### Running the slack bot
 
 ```
 cd slack
 token=<slack api token here> node convo-bot.js
 ```
 
-### Running the site
+#### Running the site
 
 ```
 cd site
 node site.js
 ```
 
-## Server Commands
+### Server Commands
 
-### Checking if everything is still running
+
+#### Check current process status
 
 ```
 pm2 list
 ```
 
-### Updating on the server
+#### Updating on the server
 
 ```
 cd /var/www/lunch-club
@@ -38,16 +42,16 @@ git pull
 sudo pm2 restart
 ```
 
-### Starting up again
+#### Starting up again
 
 If the server crashes, pm2 should automatically bring both the processes back up. If it fails to do this and `pm2 list` shows no active processes then use these commands to re-add them.
 
 ```
 cd /var/www/lunch-club/site/
-pm2 start site.js
+sudo pm2 start site.js
 
 cd ../slack/
-pm2 start convo-bot.js
+sudo pm2 start convo-bot.js
 
 pm2 list
 ```
