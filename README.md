@@ -1,7 +1,6 @@
 # Lunch Club
-
+<br>
 ### Local Setup
-
 
 #### Installing
 
@@ -25,6 +24,7 @@ cd site
 node site.js
 ```
 
+<br>
 ### Server Commands
 
 
