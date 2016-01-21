@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 var Botkit  = require('botkit');
 var Store   = require("jfs");
 var _       = require('underscore');
