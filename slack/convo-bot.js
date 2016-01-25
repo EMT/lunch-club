@@ -47,8 +47,17 @@ controller.on('rtm_open',function(bot) {
 // Check if we get kicked off the Real Time Messaging API
 controller.on('rtm_close',function(bot) {
   console.log('** The RTM api just closed');
-  // we may want to attempt to re-open every 10 seconds or so ?
+  reconnectRTM(controller);
 });
+
+function reconnectRTM(controller) {
+  controller.startRTM(function(err) {
+    if (err) {
+      throw new Error(err);
+      reconnectRTM(controller);
+    }
+  });
+}
 
 /*
    Remove the latest review from the database when a user:
