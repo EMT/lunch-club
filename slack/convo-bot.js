@@ -186,7 +186,6 @@ askRating = function(response, convo) {
   }, {'key': 'rating'});
 }
 
-
 /*
   Helper Functions
 */
@@ -231,7 +230,7 @@ storeData = function(response, convo) {
       // Add the time it was created.
       res.created = Date.now().toString();
 
-      console.log('** SAVED: ' + JSON.stringify(res));
+      console.log('[Saved]: ' + JSON.stringify(res));
       // save with generated ID
       db.save(res, function(err, id){
         // id is a unique ID
