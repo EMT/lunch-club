@@ -123,7 +123,6 @@ askWinner = function(response, convo) {
   convo.ask("Sí, who had the best meal?", function(response, convo) {
     checkCancel(response, convo);
 
-    // If the response contains me, myself, etc.. then we call findMyself
     if (phrases.me.test(response.text)) {
       findMyself(response.user, function(results) {
         if (results) {
@@ -132,26 +131,16 @@ askWinner = function(response, convo) {
       });
     }
 
-    askLoser(response, convo);
+    askTopic(response, convo);
     convo.next();
   }, {'key': 'winner'});
 }
-askLoser = function(response, convo) {
-  convo.ask("Sí, who had the worst meal?", function(response, convo) {
+askTopic = function(response, convo) {
+  convo.ask("Sí, what did you talk about?", function(response, convo) {
     checkCancel(response, convo);
-
-    // If the response contains me, myself, etc.. then we call findMyself
-    if (phrases.me.test(response.text)) {
-      findMyself(response.user, function(results) {
-        if (results) {
-          response.text = results.capitalize();
-        }
-      });
-    }
-
     askMeatyness(response, convo);
     convo.next();
-  }, {'key': 'loser'});
+  }, {'key': 'topic'});
 }
 askMeatyness = function(response, convo) {
   convo.ask("Sí, would you rate the meatiness high, medium, low or zero?", function(response, convo) {
