@@ -70,18 +70,26 @@ controller.hears(['hello', 'hi', 'hiya', 'hey'],['direct_mention','direct_messag
    - Direct Mentions the bot with: @waiter-bot remove latest
 */
 
-controller.hears(['remove latest'],['direct_mention','direct_message'],function(bot,message) {
+controller.hears(['remove (.*)'],['direct_mention','direct_message'],function(bot,message) {
 
   var reviews = db.allSync();
   var reviewsKeys = _.keys(reviews)
   var keysLength = reviewsKeys.length;
+  var reviewID = message.match[1]
 
   reviewsKeys.forEach(function(key,index) {
-      if (index + 1 == keysLength) {
-        db.delete(key, function(err){
-          bot.reply(message, 'Sí, latest review removed.');
-          console.log(key, index);
-        });
+      if (reviewID == 'latest' || reviewID == 'undefined') {
+        if (index + 1 == keysLength) {
+          db.delete(key, function(err){
+            bot.reply(message, 'Sí, latest review removed.');
+          });
+        }
+      } else {
+        if (reviewID == key) {
+          db.delete(reviewID, function(err){
+            bot.reply(message, 'Sí, (' + key + ') was removed');
+          })
+        }
       }
   });
 
