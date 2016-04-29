@@ -149,4 +149,7 @@ html {
   background: #fee3e5;
   color: #ff424f; }
 
+a {
+  color: inherit; }
+
 /*# sourceMappingURL=style.css.map */

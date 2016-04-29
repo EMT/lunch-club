@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 
 var Botkit  = require('botkit');
 var Store   = require("jfs");
@@ -59,6 +59,10 @@ function reconnectRTM(controller) {
   });
 }
 
+controller.hears(['hello', 'hi', 'hiya', 'hey'],['direct_mention','direct_message'],function(bot,message) {
+  bot.reply(message, 'Hola, I know nothing... but i learn, i learn, i learn!');
+});
+
 /*
    Remove the latest review from the database when a user:
 
@@ -79,6 +83,25 @@ controller.hears(['remove latest'],['direct_mention','direct_message'],function(
           console.log(key, index);
         });
       }
+  });
+
+});
+
+/*
+   List all the reviews in one messages with an id and date.
+
+   - Direct Messages the bot with: list all
+   - Direct Mentions the bot with: @waiter-bot list all
+*/
+
+controller.hears(['list all'],['direct_mention','direct_message'],function(bot,message) {
+
+  var reviews = db.allSync();
+  var reviewsKeys = _.keys(reviews)
+  var keysLength = reviewsKeys.length;
+
+  reviewsKeys.forEach(function(key,index) {
+      bot.reply(message, key + ' - ' +index);
   });
 
 });
@@ -107,9 +130,17 @@ askWhere = function(response, convo) {
   convo.say("¿Qué?");
   convo.ask("Oh, where did you go?", function(response, convo) {
     checkCancel(response, convo);
-    askWhen(response, convo);
+    askLink(response, convo);
     convo.next();
   }, {'key': 'where'});
+}
+askLink = function(response, convo) {
+  convo.ask("Sí, can you give me a link for the place (google maps/website) ?", function(response, convo) {
+    checkCancel(response, convo);
+    response.text = handleUrl(response.text);
+    askWhen(response, convo);
+    convo.next();
+  }, {'key': 'link'});
 }
 askWhen = function(response, convo) {
   convo.ask("Sí, when did you go?", function(response, convo) {
@@ -240,7 +271,17 @@ handleDate = function(date) {
     return formattedDate;
 }
 
-// Why doesn't javascript have this as default ?
+// Check if slack added the < and > characters to the start and end of the string,
+// if it did then chop them off.
+handleUrl = function(url) {
+  if (url.substring(url.length-1) == '>') {
+    url = url.slice(0, -1);
+    url = url.substring(1);
+  }
+
+  return url;
+}
+
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
 }
