@@ -275,8 +275,7 @@ handleDate = function(date) {
 // if it did then chop them off.
 handleUrl = function(url) {
   if (url.substring(url.length-1) == '>') {
-    url = url.slice(0, -1);
-    url = url.substring(1);
+    url = url.slice(1, -1);
   }
 
   return url;
