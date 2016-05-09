@@ -39,7 +39,7 @@ pm2 list
 ```
 cd /var/www/lunch-club
 git pull
-sudo pm2 restart
+pm2 restart
 ```
 
 #### Starting up again
@@ -48,10 +48,10 @@ If the server crashes, pm2 should automatically bring both the processes back up
 
 ```
 cd /var/www/lunch-club/site/
-sudo pm2 start site.js
+pm2 start site.js
 
 cd ../slack/
-sudo pm2 start convo-bot.js
+pm2 start convo-bot.js
 
 pm2 list
 ```
