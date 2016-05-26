@@ -1,12 +1,15 @@
 // require('dotenv').config();
 
-var Botkit  = require('botkit');
-var Store   = require("jfs");
-var _       = require('underscore');
-var request = require('request');
-var chrono  = require('chrono-node');
-var moment  = require('moment');
-var db      = new Store("../data",{pretty:true, type:'single'});
+var Botkit   = require('botkit');
+var Store    = require("jfs");
+var _        = require('underscore');
+var request  = require('request');
+var chrono   = require('chrono-node');
+var moment   = require('moment');
+var db       = new Store("../data",{pretty:true, type:'single'});
+var Entities = require('html-entities').XmlEntities;
+
+entities = new Entities();
 
 // Check if we have a slack api token set, if we don't then cancel out.
 if (!process.env.token) {
@@ -257,7 +260,7 @@ storeData = function(response, convo) {
       var res = convo.extractResponses();
       // Add the time it was created.
       res.created = Date.now().toString();
-      res.where = decodeEntities(res.where);
+      res.where = entities.decode(res.where);
 
       console.log('[Saved]: ' + JSON.stringify(res));
       // save with generated ID
@@ -290,11 +293,6 @@ handleUrl = function(url) {
   return url;
 }
 
-function decodeEntities(encodedString) {
-    var textArea = document.createElement('textarea');
-    textArea.innerHTML = encodedString;
-    return textArea.value;
-}
 
 String.prototype.capitalize = function() {
     return this.charAt(0).toUpperCase() + this.slice(1);
