@@ -257,6 +257,7 @@ storeData = function(response, convo) {
       var res = convo.extractResponses();
       // Add the time it was created.
       res.created = Date.now().toString();
+      res.where = decodeEntities(res.where);
 
       console.log('[Saved]: ' + JSON.stringify(res));
       // save with generated ID
@@ -287,6 +288,12 @@ handleUrl = function(url) {
   }
 
   return url;
+}
+
+function decodeEntities(encodedString) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    return textArea.value;
 }
 
 String.prototype.capitalize = function() {
